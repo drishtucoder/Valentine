@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Malhar 💗</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffb3c6, #ffd6e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', 'Nunito', sans-serif;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 22px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 20px;
+  color: #ff4d6d;
+  margin-bottom: 15px;
+}
+
+.option {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: #f2f2f2;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #ffd6e0;
+}
+
+.feedback {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.hearts {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.next {
+  margin-top: 12px;
+  background: #ff4d6d;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.yes {
+  background: #4CAF50;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.no {
+  background: #e63946;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+.shy {
+  margin-top: 60px;
+  font-size: 14px;
+  color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <img id="photo" src="photo.jpg" style="display:none;">
+  <h1 id="question"></h1>
+  <div id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="hearts" id="hearts"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    img: true,
+    q: "Where did we click this picture?",
+    options: [
+      "a. Cacao Restobar",
+      "b. Tap Juhu",
+      "c. Rude Lounge",
+      "d. Kya farak padta hai jab main tumhaare dil mein hu?"
+    ],
+    answer: 2
+  },
+  {
+    q: "When was the first time we had sex?",
+    options: [
+      "a. Feb 23, 2024",
+      "b. Feb 18, 2024",
+      "c. Feb 24, 2024",
+      "d. Feb 27, 2024"
+    ],
+    answer: 3
+  },
+  {
+    q: "What is my favourite nickname that you call me by?",
+    options: [
+      "a. babu",
+      "b. baccha",
+      "c. drishtu",
+      "d. baby"
+    ],
+    answer: 1
+  },
+  {
+    q: "Malhar, kya yeh gaadi automatic hai?",
+    options: [
+      "a. haan",
+      "b. haan, saare hi gaadiyan automatic hai 🚙",
+      "c. dekho main ragebait nahi hota",
+      "d. yaar tum mujhe ragebait mat karo haan",
+      "e. DRISHTI YAAR GUSSA KYU HOJAATE HO BAAT BAAT PE",
+      "f. *holds my hand*"
+    ],
+    answer: 5
+  },
+  {
+    q: "What do I love about us the most?",
+    options: [
+      "a. the sex",
+      "b. cuddles",
+      "c. the banter",
+      "d. the manaoifying post the banter"
+    ],
+    answer: 3
+  }
+];
+
+let current = 0;
+let hearts = 0;
+
+function loadQuestion() {
+  const q = questions[current];
+  document.getElementById("feedback").innerHTML = "";
+  document.getElementById("hearts").innerHTML = "❤️".repeat(hearts);
+  document.getElementById("question").innerText = q.q;
+
+  const img = document.getElementById("photo");
+  if (q.img) {
+    img.style.display = "block";
+  } else {
+    img.style.display = "none";
+  }
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(i);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function checkAnswer(i) {
+  const feedback = document.getElementById("feedback");
+  if (i === questions[current].answer) {
+    hearts++;
+    feedback.innerHTML = "❤️ Correct!";
+  } else {
+    feedback.innerHTML = "❌ Do you even love me? 🥺";
+  }
+
+  document.getElementById("options").innerHTML +=
+    `<button class="next" onclick="next()">Next</button>`;
+}
+
+function next() {
+  current++;
+  if (current < questions.length) {
+    loadQuestion();
+  } else {
+    valentine();
+  }
+}
+
+function valentine() {
+  document.getElementById("card").innerHTML = `
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="yes()">YES</button>
+      <button class="no" id="no">NO</button>
+    </div>
+
+    <div class="shy">No seems a little shy</div>
+  `;
+
+  const no = document.getElementById("no");
+  no.onmouseover = moveNo;
+  no.ontouchstart = moveNo;
+}
+
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.top = Math.random() * 250 + "px";
+  no.style.left = Math.random() * 200 + "px";
+}
+
+function yes() {
+  alert("Thank you so much! You made my day! 🥺❤️\n(You’ll forever be my Valentine 😉)");
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
