@@ -3,36 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <title>Valentine Quiz 💖</title>
+
 <style>
 body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", Arial, sans-serif;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .card {
-  background: white;
-  border-radius: 30px;
-  padding: 40px;
-  max-width: 420px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
 h2 {
-  color: #ff4d6d;
+    color: #ff4d6d;
 }
 
 .option {
-  display: block;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 25px;
-  background: #f2f2f2;
-  border: none;
-  cursor: point
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: #f2f2f2;
+    font-size: 14px;
+}
+
+.option:hover {
+    background: #eaeaea;
+}
+
+.next-btn {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+#yesBtn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 10px;
+}
+
+#noBtn {
+    background: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="slide"></div>
+
+<script>
+let current = 0;
+
+const slides = [
+
+/* INTRO */
+{
+html: `
+<h2>Happiest Valentine’s Day, my love 💘</h2>
+<p>Now let's test your love, shall we?</p>
+<button class="next-btn" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* Q1 – Nickname */
+{
+html: `
+<h2>What is my favourite nickname that you call me by?</h2>
+
+<button class="option" onclick="checkAnswer(this)">a. babu</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">b. baccha</button>
+<button class="option" onclick="checkAnswer(this)">c. drishtu</button>
+<button class="option" onclick="checkAnswer(this)">d. baby</button>
+
+<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* Q2 – First time */
+{
+html: `
+<h2>When was the first time we had sex?</h2>
+
+<button class="option" onclick="checkAnswer(this)">a. 23rd Feb 2024</button>
+<button class="option" onclick="checkAnswer(this)">b. 18th Feb 2024</button>
+<button class="option" onclick="checkAnswer(this)">c. 24th Feb 2024</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">d. 27th Feb 2024</button>
+
+<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* Q3 – Photo location */
+{
+html: `
+<img src="photo.jpg">
+<h2>Where did we click this picture?</h2>
+
+<button class="option" onclick="checkAnswer(this)">a. Cacao Restobar</button>
+<button class="option" onclick="checkAnswer(this)">b. Tap Juhu</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">c. Rude Lounge</button>
+<button class="option" onclick="checkAnswer(this)">d. Kya farak padta hai jab main tumhaare dil mein hu?</button>
+
+<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* Q4 – Car */
+{
+html: `
+<h2>Malhar, kya yeh gaadi automatic hai?</h2>
+
+<button class="option" onclick="checkAnswer(this)">a. haan</button>
+<button class="option" onclick="checkAnswer(this)">b. haan, saare hi gaadiyan automatic hai 🚙</button>
+<button class="option" onclick="checkAnswer(this)">c. dekho main ragebait nahi hota</button>
+<button class="option" onclick="checkAnswer(this)">d. yaar tum mujhe ragebait mat karo haan</button>
+<button class="option" onclick="checkAnswer(this)">e. DRISHTI YAAR GUSSA KYU HOJAATE HO BAAT BAAT PE</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">f. *holds my hand*</button>
+
+<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* Q5 – What you love */
+{
+html: `
+<h2>What do I love about us the most?</h2>
+
+<button class="option" onclick="checkAnswer(this)">a. the sex</button>
+<button class="option" onclick="checkAnswer(this)">b. cuddles</button>
+<button class="option" onclick="checkAnswer(this)">c. the banter</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">d. the manaofying post the banter</button>
+
+<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
+`
+},
+
+/* FINAL */
+{
+html: `
+<h2>Will you be my Valentine? 💘</h2>
+
+<button id="yesBtn" onclick="yes()">Yes</button>
+<button id="noBtn" onmouseover="runAway()">No</button>
+<p>(No seems a little shy)</p>
+`
+}
+
+];
+
+function loadSlide() {
+    document.getElementById("slide").innerHTML = slides[current].html;
+}
+
+function nextSlide() {
+    current++;
+    loadSlide();
+}
+
+function checkAnswer(btn) {
+    const options = document.querySelectorAll(".option");
+    const nextBtn = document.querySelector(".next-btn");
+
+    options.forEach(o => o.disabled = true);
+
+    options.forEach(o => {
+        if (o.dataset.correct === "true") {
+            o.innerHTML += " ✅";
+            o.style.background = "#d4f8d4";
+        }
+    });
+
+    if (!btn.dataset.correct) {
+        btn.innerHTML += " ❌";
+        btn.style.background = "#ffd6d6";
+    }
+
+    nextBtn.classList.remove("hidden");
+}
+
+function runAway() {
+    const no = document.getElementById("noBtn");
+    no.style.left = Math.random() * 100 + "px";
+    no.style.top = Math.random() * 60 + "px";
+}
+
+function yes() {
+    alert("Thank you so much! You made my day! 🥺❤️\n(You’ll forever be my Valentine 😉)");
+}
+
+loadSlide();
+</script>
+
+</body>
+</html>
