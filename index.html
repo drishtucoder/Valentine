@@ -17,11 +17,11 @@ body {
 
 .card {
     background: white;
-    border-radius: 24px;
-    padding: 30px;
-    width: 350px;
+    border-radius: 26px;
+    padding: 28px;
+    width: 360px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.18);
 }
 
 h2 {
@@ -32,8 +32,8 @@ h2 {
     display: block;
     width: 100%;
     margin: 10px 0;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 11px;
+    border-radius: 22px;
     border: none;
     cursor: pointer;
     background: #f2f2f2;
@@ -44,42 +44,54 @@ h2 {
     background: #eaeaea;
 }
 
+.option:disabled {
+    cursor: default;
+}
+
 .next-btn {
-    margin-top: 15px;
-    padding: 8px 20px;
-    border-radius: 20px;
+    margin-top: 18px;
+    padding: 9px 22px;
+    border-radius: 22px;
     border: none;
     background: #ff4d6d;
     color: white;
     cursor: pointer;
+    display: none;
 }
 
-.hidden {
-    display: none;
+.reaction {
+    margin-top: 14px;
+    padding: 12px;
+    background: #ffe6ee;
+    border-radius: 18px;
+    font-size: 14px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
 
 img {
     width: 100%;
-    border-radius: 15px;
-    margin-bottom: 15px;
+    border-radius: 18px;
+    margin-bottom: 14px;
 }
 
 #yesBtn {
     background: #4CAF50;
     color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 11px 22px;
+    border-radius: 22px;
     border: none;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 #noBtn {
     background: #f44336;
     color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 11px 22px;
+    border-radius: 22px;
     border: none;
     position: relative;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -97,91 +109,86 @@ const slides = [
 {
 html: `
 <h2>Happiest Valentine’s Day, my love 💘</h2>
-<p>Now let's test your love, shall we?</p>
-<button class="next-btn" onclick="nextSlide()">Next →</button>
+<p>Now let’s test your love, shall we?</p>
+<button class="next-btn" style="display:block" onclick="nextSlide()">Next →</button>
 `
 },
 
-/* Q1 – Nickname */
+/* Q1 */
 {
-html: `
+question: `
 <h2>What is my favourite nickname that you call me by?</h2>
-
 <button class="option" onclick="checkAnswer(this)">a. babu</button>
 <button class="option" data-correct="true" onclick="checkAnswer(this)">b. baccha</button>
 <button class="option" onclick="checkAnswer(this)">c. drishtu</button>
 <button class="option" onclick="checkAnswer(this)">d. baby</button>
-
-<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
-`
+`,
+right: "you know me so well and i’ll always be your baccha🥺❤️",
+wrong: "but i’m your baccha no?🥺"
 },
 
-/* Q2 – First time */
+/* Q2 */
 {
-html: `
-<h2>When was the first time we had sex?</h2>
-
-<button class="option" onclick="checkAnswer(this)">a. 23rd Feb 2024</button>
-<button class="option" onclick="checkAnswer(this)">b. 18th Feb 2024</button>
-<button class="option" onclick="checkAnswer(this)">c. 24th Feb 2024</button>
-<button class="option" data-correct="true" onclick="checkAnswer(this)">d. 27th Feb 2024</button>
-
-<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
-`
-},
-
-/* Q3 – Photo location */
-{
-html: `
+question: `
 <img src="photo.jpg">
 <h2>Where did we click this picture?</h2>
-
 <button class="option" onclick="checkAnswer(this)">a. Cacao Restobar</button>
 <button class="option" onclick="checkAnswer(this)">b. Tap Juhu</button>
 <button class="option" data-correct="true" onclick="checkAnswer(this)">c. Rude Lounge</button>
 <button class="option" onclick="checkAnswer(this)">d. Kya farak padta hai jab main tumhaare dil mein hu?</button>
-
-<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
-`
+`,
+right: "Chal aey chal yeh toh easy tha😏",
+wrong: "Vaibhav ka bday party bhul gaye?😱"
 },
 
-/* Q4 – Car */
+/* Q3 */
 {
-html: `
-<h2>Malhar, kya yeh gaadi automatic hai?</h2>
+question: `
+<h2>When was the first time we had sex?</h2>
+<button class="option" onclick="checkAnswer(this)">a. 23rd Feb 2024</button>
+<button class="option" onclick="checkAnswer(this)">b. 18th Feb 2024</button>
+<button class="option" onclick="checkAnswer(this)">c. 24th Feb 2024</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">d. 27th Feb 2024</button>
+`,
+right: "whoa what😳 i could’ve sworn you didn’t know this — and just for this, you know what your reward is😏😉🥰😘",
+wrong: "good to know that our first time didn’t matter to you😔😣😭"
+},
 
+/* Q4 */
+{
+question: `
+<h2>What do I love about us the most?</h2>
+<button class="option" onclick="checkAnswer(this)">a. the sex</button>
+<button class="option" onclick="checkAnswer(this)">b. cuddles</button>
+<button class="option" onclick="checkAnswer(this)">c. the banter</button>
+<button class="option" data-correct="true" onclick="checkAnswer(this)">d. the manaofying post the banter</button>
+`,
+right: "that's right, bhaav khaana is lowkey my hobby😂",
+wrong: "yaar but bhaav khaana toh mera favourite hai na…"
+},
+
+/* Q5 */
+{
+question: `
+<h2>Malhar, kya yeh gaadi automatic hai?</h2>
 <button class="option" onclick="checkAnswer(this)">a. haan</button>
 <button class="option" onclick="checkAnswer(this)">b. haan, saare hi gaadiyan automatic hai 🚙</button>
 <button class="option" onclick="checkAnswer(this)">c. dekho main ragebait nahi hota</button>
 <button class="option" onclick="checkAnswer(this)">d. yaar tum mujhe ragebait mat karo haan</button>
 <button class="option" onclick="checkAnswer(this)">e. DRISHTI YAAR GUSSA KYU HOJAATE HO BAAT BAAT PE</button>
 <button class="option" data-correct="true" onclick="checkAnswer(this)">f. *holds my hand*</button>
-
-<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
-`
-},
-
-/* Q5 – What you love */
-{
-html: `
-<h2>What do I love about us the most?</h2>
-
-<button class="option" onclick="checkAnswer(this)">a. the sex</button>
-<button class="option" onclick="checkAnswer(this)">b. cuddles</button>
-<button class="option" onclick="checkAnswer(this)">c. the banter</button>
-<button class="option" data-correct="true" onclick="checkAnswer(this)">d. the manaofying post the banter</button>
-
-<button class="next-btn hidden" onclick="nextSlide()">Next →</button>
-`
+`,
+right: "just because you got this right doesn’t mean you already aren’t a little slow in the head😒",
+wrong: "ispe galat answer matlab samjho main hi ragebait ho chuki hu. 😤"
 },
 
 /* FINAL */
 {
 html: `
 <h2>Will you be my Valentine? 💘</h2>
-
 <button id="yesBtn" onclick="yes()">Yes</button>
 <button id="noBtn" onmouseover="runAway()">No</button>
+
 <p>(No seems a little shy)</p>
 `
 }
@@ -189,7 +196,15 @@ html: `
 ];
 
 function loadSlide() {
-    document.getElementById("slide").innerHTML = slides[current].html;
+    const s = slides[current];
+    if (s.html) {
+        document.getElementById("slide").innerHTML = s.html;
+    } else {
+        document.getElementById("slide").innerHTML =
+            s.question +
+            `<div class="reaction" id="reaction" style="display:none"></div>
+             <button class="next-btn" onclick="nextSlide()">Next →</button>`;
+    }
 }
 
 function nextSlide() {
@@ -199,6 +214,7 @@ function nextSlide() {
 
 function checkAnswer(btn) {
     const options = document.querySelectorAll(".option");
+    const reaction = document.getElementById("reaction");
     const nextBtn = document.querySelector(".next-btn");
 
     options.forEach(o => o.disabled = true);
@@ -213,15 +229,19 @@ function checkAnswer(btn) {
     if (!btn.dataset.correct) {
         btn.innerHTML += " ❌";
         btn.style.background = "#ffd6d6";
+        reaction.innerText = slides[current].wrong;
+    } else {
+        reaction.innerText = slides[current].right;
     }
 
-    nextBtn.classList.remove("hidden");
+    reaction.style.display = "block";
+    nextBtn.style.display = "inline-block";
 }
 
 function runAway() {
     const no = document.getElementById("noBtn");
-    no.style.left = Math.random() * 100 + "px";
-    no.style.top = Math.random() * 60 + "px";
+    no.style.left = Math.random() * 120 + "px";
+    no.style.top = Math.random() * 80 + "px";
 }
 
 function yes() {
